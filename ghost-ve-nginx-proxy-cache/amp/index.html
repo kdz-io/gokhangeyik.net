@@ -1,0 +1,1283 @@
+<!DOCTYPE html>
+<html ⚡>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+
+    <title>Ghost ve NGINX Proxy Cache</title>
+
+    <meta name="description" content="Ghost, bir içerik yönetim sistemi. Modern ve oldukça hızlı. Benim için en büyük cazibesi ise Markdown ile makale yazabilme kolaylığı.">
+    <link rel="icon" href="https://www.gokhangeyik.net/content/images/size/w256h256/2021/01/header_logo.png" type="image/png">
+    <link rel="canonical" href="https://www.gokhangeyik.net/ghost-ve-nginx-proxy-cache/">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    
+    <meta property="og:site_name" content="Gökhan Geyik | Sistem Yöneticisi Bir Bey!">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Ghost ve NGINX Proxy Cache">
+    <meta property="og:description" content="Ghost, bir içerik yönetim sistemi. Modern ve oldukça hızlı. Benim için en büyük cazibesi ise Markdown ile makale yazabilme kolaylığı.">
+    <meta property="og:url" content="https://www.gokhangeyik.net/ghost-ve-nginx-proxy-cache/">
+    <meta property="og:image" content="https://www.gokhangeyik.net/content/images/2021/01/ghost-nginx-proxy.jpg">
+    <meta property="article:published_time" content="2021-01-10T11:15:00.000Z">
+    <meta property="article:modified_time" content="2021-01-22T10:12:52.000Z">
+    <meta property="article:tag" content="Ghost">
+    <meta property="article:tag" content="Nginx">
+    <meta property="article:tag" content="OS">
+    
+    <meta property="article:publisher" content="https://www.facebook.com/gokhangeyik.net">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Ghost ve NGINX Proxy Cache">
+    <meta name="twitter:description" content="Ghost, bir içerik yönetim sistemi. Modern ve oldukça hızlı. Benim için en büyük cazibesi ise Markdown ile makale yazabilme kolaylığı.">
+    <meta name="twitter:url" content="https://www.gokhangeyik.net/ghost-ve-nginx-proxy-cache/">
+    <meta name="twitter:image" content="https://www.gokhangeyik.net/content/images/2021/01/ghost-nginx-proxy.jpg">
+    <meta name="twitter:label1" content="Written by">
+    <meta name="twitter:data1" content="Gökhan Geyik">
+    <meta name="twitter:label2" content="Filed under">
+    <meta name="twitter:data2" content="Ghost, Nginx, OS">
+    <meta name="twitter:site" content="@gokhangeyiknet">
+    <meta name="twitter:creator" content="@gokko">
+    <meta property="og:image:width" content="2000">
+    <meta property="og:image:height" content="1125">
+    
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "publisher": {
+        "@type": "Organization",
+        "name": "Gökhan Geyik | Sistem Yöneticisi Bir Bey!",
+        "url": "https://www.gokhangeyik.net/",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "https://www.gokhangeyik.net/content/images/2021/01/logo.svg",
+            "width": 60,
+            "height": 60
+        }
+    },
+    "author": {
+        "@type": "Person",
+        "name": "Gökhan Geyik",
+        "image": {
+            "@type": "ImageObject",
+            "url": "https://www.gokhangeyik.net/content/images/2021/01/pp.jpg",
+            "width": 1588,
+            "height": 1588
+        },
+        "url": "https://www.gokhangeyik.net/author/gokko/",
+        "sameAs": [
+            "https://www.gokhangeyik.net",
+            "https://twitter.com/gokko"
+        ]
+    },
+    "headline": "Ghost ve NGINX Proxy Cache",
+    "url": "https://www.gokhangeyik.net/ghost-ve-nginx-proxy-cache/",
+    "datePublished": "2021-01-10T11:15:00.000Z",
+    "dateModified": "2021-01-22T10:12:52.000Z",
+    "image": {
+        "@type": "ImageObject",
+        "url": "https://www.gokhangeyik.net/content/images/2021/01/ghost-nginx-proxy.jpg",
+        "width": 2000,
+        "height": 1125
+    },
+    "keywords": "Ghost, Nginx, OS",
+    "description": "Ghost, bir içerik yönetim sistemi. Modern ve oldukça hızlı. Benim için en büyük cazibesi ise Markdown ile makale yazabilme kolaylığı.",
+    "mainEntityOfPage": "https://www.gokhangeyik.net/ghost-ve-nginx-proxy-cache/"
+}
+    </script>
+
+    <meta name="generator" content="Ghost 5.49">
+    <link rel="alternate" type="application/rss+xml" title="Gökhan Geyik | Sistem Yöneticisi Bir Bey!" href="https://www.gokhangeyik.net/rss/">
+
+    <style amp-custom>
+    *,
+    *::before,
+    *::after {
+        box-sizing: border-box;
+    }
+
+    html {
+        overflow-x: hidden;
+        overflow-y: scroll;
+        font-size: 62.5%;
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    }
+
+    body {
+        min-height: 100vh;
+        margin: 0;
+        padding: 0;
+        color: #3a4145;
+        font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Open Sans,Helvetica Neue,sans-serif;
+        font-size: 1.7rem;
+        line-height: 1.55em;
+        font-weight: 400;
+        font-style: normal;
+        background: #fff;
+        scroll-behavior: smooth;
+        overflow-x: hidden;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+
+    p,
+    ul,
+    ol,
+    li,
+    dl,
+    dd,
+    hr,
+    pre,
+    form,
+    table,
+    video,
+    figure,
+    figcaption,
+    blockquote {
+        margin: 0;
+        padding: 0;
+    }
+
+    ul[class],
+    ol[class] {
+        padding: 0;
+        list-style: none;
+    }
+
+    img {
+        display: block;
+        max-width: 100%;
+    }
+
+    input,
+    button,
+    select,
+    textarea {
+        font: inherit;
+        -webkit-appearance: none;
+    }
+
+    fieldset {
+        margin: 0;
+        padding: 0;
+        border: 0;
+    }
+
+    label {
+        display: block;
+        font-size: 0.9em;
+        font-weight: 700;
+    }
+
+    hr {
+        position: relative;
+        display: block;
+        width: 100%;
+        height: 1px;
+        border: 0;
+        border-top: 1px solid currentcolor;
+        opacity: 0.1;
+    }
+
+    ::selection {
+        text-shadow: none;
+        background: #cbeafb;
+    }
+
+    mark {
+        background-color: #fdffb6;
+    }
+
+    small {
+        font-size: 80%;
+    }
+
+    sub,
+    sup {
+        position: relative;
+        font-size: 75%;
+        line-height: 0;
+        vertical-align: baseline;
+    }
+    sup {
+        top: -0.5em;
+    }
+    sub {
+        bottom: -0.25em;
+    }
+
+    ul li + li {
+        margin-top: 0.6em;
+    }
+
+    a {
+        color: var(--ghost-accent-color, #1292EE);
+        text-decoration-skip-ink: auto;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        margin: 0;
+        font-weight: 700;
+        color: #121212;
+        line-height: 1.4em;
+    }
+
+    h1 {
+        font-size: 3.4rem;
+        line-height: 1.1em;
+    }
+
+    h2 {
+        font-size: 2.4rem;
+        line-height: 1.2em;
+    }
+
+    h3 {
+        font-size: 1.8rem;
+    }
+
+    h4 {
+        font-size: 1.7rem;
+    }
+
+    h5 {
+        font-size: 1.6rem;
+    }
+
+    h6 {
+        font-size: 1.6rem;
+    }
+
+    amp-img {
+        height: 100%;
+        width: 100%;
+        max-width: 100%;
+        max-height: 100%;
+    }
+
+    amp-img img {
+        object-fit: cover;
+    }
+    
+    amp-youtube {
+        height: calc(100vw / 1.78);
+        width: 100vw;
+        position: relative;
+    }
+
+    amp-youtube img {
+        position: absolute;
+    }
+
+    .page-header {
+        padding: 50px 5vmin 30px;
+        text-align: center;
+        font-size: 2rem;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    .page-header a {
+        color: #121212;
+        font-weight: 700;
+        text-decoration: none;
+        font-size: 1.6rem;
+        letter-spacing: -0.1px;
+    }
+
+    .post {
+        max-width: 680px;
+        margin: 0 auto;
+    }
+
+    .post-header {
+        margin: 0 5vmin 5vmin;
+        text-align: center;
+    }
+
+    .post-meta {
+        margin: 1rem 0 0 0;
+        text-transform: uppercase;
+        color: #738a94;
+        font-weight: 500;
+        font-size: 1.3rem;
+    }
+
+    .post-image {
+        margin: 0 0 5vmin;
+    }
+
+    .post-image img {
+        display: block;
+        width: 100%;
+        height: auto;
+    }
+
+    .post-content {
+        padding: 0 5vmin;
+    }
+
+    .post-content > * + * {
+        margin-top: 1.5em;
+    }
+
+    .post-content [id]:not(:first-child) {
+        margin: 2em 0 0;
+    }
+
+    .post-content > [id] + * {
+        margin-top: 1rem;
+    }
+
+    .post-content [id] + .kg-card,
+    .post-content blockquote + .kg-card {
+        margin-top: 40px;
+    }
+
+    .post-content > ul,
+    .post-content > ol,
+    .post-content > dl {
+        padding-left: 1.9em;
+    }
+
+    .post-content hr {
+        margin-top: 40px;
+    }
+
+    .post .post-content hr + * {
+        margin-top: 40px;
+    }
+
+    .post-content amp-img {
+        background-color: #f8f8f8;
+    }
+
+    .post-content blockquote {
+        position: relative;
+        font-style: italic;
+    }
+
+    .post-content blockquote::before {
+        content: "";
+        position: absolute;
+        left: -1.5em;
+        top: 0;
+        bottom: 0;
+        width: 0.3rem;
+        background: var(--ghost-accent-color, #1292EE);
+    }
+
+    .post-content blockquote.kg-blockquote-alt {
+        font-size: 1.2em;
+        font-style: italic;
+        line-height: 1.6em;
+        text-align: center;
+        color: #738a94;
+        padding: 0.75em 3em 1.25em;
+    }
+
+    .post-content blockquote.kg-blockquote-alt::before {
+        display: none;
+    }
+
+    .post-content :not(.kg-card):not([id]) + .kg-card {
+        margin-top: 40px;
+    }
+
+    .post-content .kg-card + :not(.kg-card) {
+        margin-top: 40px;
+    }
+
+    .kg-card figcaption {
+        padding: 1.5rem 1.5rem 0;
+        text-align: center;
+        font-weight: 500;
+        font-size: 1.3rem;
+        line-height: 1.4em;
+        opacity: 0.6;
+    }
+
+    .kg-card figcaption strong {
+        color: rgba(0,0,0,0.8);
+    }
+
+    .post-content :not(pre) code {
+        vertical-align: middle;
+        padding: 0.15em 0.4em 0.15em;
+        border: #e1eaef 1px solid;
+        font-weight: 400;
+        font-size: 0.9em;
+        line-height: 1em;
+        color: #15171a;
+        background: #f0f6f9;
+        border-radius: 0.25em;
+    }
+
+    .post-content > pre {
+        overflow: scroll;
+        padding: 16px 20px;
+        color: #fff;
+        background: #1F2428;
+        border-radius: 5px;
+        box-shadow: 0 2px 6px -2px rgba(0,0,0,.1), 0 0 1px rgba(0,0,0,.4);
+    }
+
+    .kg-embed-card {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+
+    .kg-image-card img {
+        margin: auto;
+    }
+
+    .kg-gallery-card + .kg-gallery-card {
+        margin-top: 0.75em;
+    }
+
+    .kg-gallery-container {
+        position: relative;
+    }
+
+    .kg-gallery-row {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+    }
+
+    .kg-gallery-image {
+        width: 100%;
+        height: 100%;
+    }
+
+    .kg-gallery-row:not(:first-of-type) {
+        margin: 0.75em 0 0 0;
+    }
+
+    .kg-gallery-image:not(:first-of-type) {
+        margin: 0 0 0 0.75em;
+    }
+
+    .kg-bookmark-card,
+    .kg-bookmark-publisher {
+        position: relative;
+    }
+
+    .kg-bookmark-container,
+    .kg-bookmark-container:hover {
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row-reverse;
+        color: currentColor;
+        background: rgba(255,255,255,0.6);
+        font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Open Sans,Helvetica Neue,sans-serif;
+        text-decoration: none;
+        border-radius: 3px;
+        box-shadow: 0 2px 6px -2px rgba(0, 0, 0, 0.1), 0 0 1px rgba(0, 0, 0, 0.4);
+        overflow: hidden;
+    }
+
+    .kg-bookmark-content {
+        flex-basis: 0;
+        flex-grow: 999;
+        padding: 20px;
+        order: 1;
+    }
+
+    .kg-bookmark-title {
+        font-weight: 600;
+        font-size: 1.5rem;
+        line-height: 1.3em;
+    }
+
+    .kg-bookmark-description {
+        display: -webkit-box;
+        max-height: 45px;
+        margin: 0.5em 0 0 0;
+        font-size: 1.4rem;
+        line-height: 1.55em;
+        overflow: hidden;
+        opacity: 0.8;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+    }
+
+    .kg-bookmark-metadata {
+        margin-top: 20px;
+    }
+
+    .kg-bookmark-metadata {
+        display: flex;
+        align-items: center;
+        font-weight: 500;
+        font-size: 1.3rem;
+        line-height: 1.3em;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .kg-bookmark-description {
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+        overflow: hidden;
+    }
+
+    .kg-bookmark-metadata amp-img {
+        width: 18px;
+        height: 18px;
+        max-width: 18px;
+        max-height: 18px;
+        margin-right: 10px;
+    }
+
+    .kg-bookmark-thumbnail {
+        display: flex;
+        flex-basis: 20rem;
+        flex-grow: 1;
+        justify-content: flex-end;
+    }
+
+    .kg-bookmark-thumbnail amp-img {
+        max-height: 200px;
+    }
+
+    .kg-bookmark-author {
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+    }
+
+    .kg-bookmark-publisher::before {
+        content: "•";
+        margin: 0 .5em;
+    }
+
+    .kg-toggle-card-icon {
+        display: none;
+    }
+
+    .kg-toggle-content {
+        margin-top: 0.8rem;
+    }
+
+    .kg-product-card-container {
+        background: transparent;
+        padding: 20px;
+        width: 100%;
+        border-radius: 5px;
+        box-shadow: inset 0 0 0 1px rgb(124 139 154 / 25%);
+    }
+
+    .kg-product-card-description p {
+        margin-top: 1.5em;
+    }
+
+    .kg-product-card-description ul {
+        margin-left: 24px;
+    }
+
+    .kg-product-card-title {
+        font-size: 1.9rem;
+        font-weight: 700;
+    }
+
+    .kg-product-card-rating-star {
+        height: 28px;
+        width: 20px;
+        margin-right: 2px;
+    }
+
+    .kg-product-card-rating-star svg {
+    width: 16px;
+    height: 16px;
+    fill: currentColor;
+    opacity: 0.15;
+    }
+
+    .kg-product-card-rating-active.kg-product-card-rating-star svg {
+    opacity: 1;
+    }
+
+    .kg-nft-card-container {
+        position: relative;
+        display: flex;
+        flex: auto;
+        flex-direction: column;
+        text-decoration: none;
+        font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Open Sans,Helvetica Neue,sans-serif;
+        font-size: 1.4rem;
+        font-weight: 400;
+        box-shadow: 0 2px 6px -2px rgb(0 0 0 / 10%), 0 0 1px rgb(0 0 0 / 40%);
+        width: 100%;
+        max-width: 512px;
+        color: #15212A;
+        background: #fff;
+        border-radius: 5px;
+        transition: none;
+        margin: 0 auto;
+    }
+
+    .kg-nft-metadata {
+        padding: 2.0rem;
+    }
+
+    .kg-nft-image-container {
+        position: relative;
+    }
+
+    .kg-nft-image {
+        display: flex;
+        border-radius: 5px 5px 0 0;
+    }
+
+    .kg-nft-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 20px;
+    }
+
+    .kg-nft-header h4.kg-nft-title {
+        font-size: 1.9rem;
+        font-weight: 700;
+        margin: 0;
+        color: #15212A;
+    }
+
+    .kg-nft-header amp-img {
+        max-width: 114px;
+        max-height: 26px;
+    }
+
+    .kg-nft-opensea-logo {
+        margin-top: 2px;
+        width: 100px;
+    }
+
+    .kg-nft-creator {
+        font-family: inherit;
+        color: #95A1AD;
+    }
+
+    .kg-nft-creator span {
+        font-weight: 500;
+        color: #15212A;
+    }
+
+    .kg-nft-card p.kg-nft-description {
+        font-size: 1.4rem;
+        line-height: 1.4em;
+        margin: 2.0rem 0 0;
+        color: #222;
+    }
+
+    .kg-button-card {
+        display: flex;
+        position: static;
+        align-items: center;
+        width: 100%;
+        justify-content: center;
+    }
+
+    .kg-btn {
+        display: flex;
+        position: static;
+        align-items: center;
+        padding: 0 2.0rem;
+        height: 4.0rem;
+        line-height: 4.0rem;
+        font-size: 1.65rem;
+        font-weight: 600;
+        text-decoration: none;
+        border-radius: 5px;
+        transition: opacity 0.2s ease-in-out;
+    }
+
+    .kg-btn:hover {
+        opacity: 0.85;
+    }
+
+    .kg-btn-accent {
+        background-color: var(--ghost-accent-color, #1292EE);
+        color: #fff;
+    }
+
+    .kg-callout-card {
+        display: flex;
+        padding: 20px 28px;
+        border-radius: 3px;
+    }
+
+    .kg-callout-card-grey {
+        background: rgba(124, 139, 154, 0.13);
+    }
+
+    .kg-callout-card-white {
+        background: transparent;
+        box-shadow: inset 0 0 0 1px rgba(124, 139, 154, 0.25);
+    }
+
+    .kg-callout-card-blue {
+        background: rgba(33, 172, 232, 0.12);
+    }
+
+    .kg-callout-card-green {
+        background: rgba(52, 183, 67, 0.12);
+    }
+
+    .kg-callout-card-yellow {
+        background: rgba(240, 165, 15, 0.13);
+    }
+
+    .kg-callout-card-red {
+        background: rgba(209, 46, 46, 0.11);
+    }
+
+    .kg-callout-card-pink {
+        background: rgba(225, 71, 174, 0.11);
+    }
+
+    .kg-callout-card-purple {
+        background: rgba(135, 85, 236, 0.12);
+    }
+
+    .kg-callout-card-accent {
+        background: var(--ghost-accent-color);
+        color: #fff;
+    }
+
+    .kg-callout-card-accent a {
+        color: #fff;
+    }
+
+    .kg-callout-emoji {
+        padding-right: 16px;
+        line-height: 1.3;
+        font-size: 1.25em;
+    }
+
+    .kg-header-card {
+        padding: 6em 3em;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+
+    .kg-header-card.kg-size-small {
+        padding-top: 4em;
+        padding-bottom: 4em;
+    }
+
+    .kg-header-card.kg-size-large {
+        padding-top: 12em;
+        padding-bottom: 12em;
+    }
+
+    .kg-header-card.kg-width-full {
+        padding-left: 4em;
+        padding-right: 4em;
+    }
+
+    .kg-header-card.kg-align-left {
+        text-align: left;
+        align-items: flex-start;
+    }
+
+    .kg-header-card.kg-style-dark {
+        background: #15171a;
+        color: #ffffff;
+    }
+
+    .kg-header-card.kg-style-light {
+        color: #15171a;
+        border: 1px solid rgba(124, 139, 154, 0.25);
+        border-width: 1px 0;
+    }
+
+    .kg-header-card.kg-style-accent {
+        background-color: var(--ghost-accent-color);
+    }
+
+    .kg-header-card.kg-style-image {
+        background-color: #e7e7eb;
+        background-size: cover;
+        background-position: center center;
+    }
+
+    .kg-header-card h2 {
+        font-size: 4em;
+        font-weight: 700;
+        line-height: 1.1em;
+        margin: 0;
+    }
+
+    .kg-header-card h2 strong {
+        font-weight: 800;
+    }
+
+    .kg-header-card.kg-size-small h2 {
+        font-size: 3em;
+    }
+
+    .kg-header-card.kg-size-large h2 {
+        font-size: 5em;
+    }
+
+    .kg-header-card h3 {
+        font-size: 1.25em;
+        font-weight: 500;
+        line-height: 1.3em;
+        margin: 0;
+    }
+
+    .kg-header-card h3 strong {
+        font-weight: 600;
+    }
+
+    .kg-header-card.kg-size-small h3 {
+        font-size: 1em;
+    }
+
+    .kg-header-card.kg-size-large h3 {
+        font-size: 1.5em;
+    }
+
+    .kg-header-card:not(.kg-style-light) h2,
+    .kg-header-card:not(.kg-style-light) h3 {
+        color: #ffffff;
+    }
+
+    .kg-header-card a.kg-header-card-button {
+        display: flex;
+        position: static;
+        align-items: center;
+        padding: 0 1.2em;
+        height: 2.4em;
+        line-height: 1em;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+        font-size: 0.95em;
+        font-weight: 600;
+        text-decoration: none;
+        border-radius: 5px;
+        transition: opacity 0.2s ease-in-out;
+        background-color: var(--ghost-accent-color);
+        color: #ffffff;
+        margin: 1.75em 0 0;
+    }
+
+    .kg-header-card a.kg-header-card-button:hover {
+        opacity: 0.85;
+    }
+
+    .kg-header-card.kg-size-large a.kg-header-card-button {
+        margin-top: 2em;
+    }
+
+    .kg-header-card.kg-size-small a.kg-header-card-button {
+        margin-top: 1.5em;
+    }
+
+    .kg-header-card.kg-style-image a.kg-header-card-button,
+    .kg-header-card.kg-style-dark a.kg-header-card-button {
+        background: #ffffff;
+        color: #15171a;
+    }
+
+    .kg-header-card.kg-style-accent a.kg-header-card-button {
+        background: #ffffff;
+        color: var(--ghost-accent-color);
+    }
+
+    .kg-audio-card {
+        display: flex;
+        width: 100%;
+        box-shadow: inset 0 0 0 1px rgba(124, 139, 154, 0.25);
+    }
+
+    .kg-audio-thumbnail {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 80px;
+        min-width: 80px;
+        height: 80px;
+        background: transparent;
+        object-fit: cover;
+        aspect-ratio: 1/1;
+        border-radius: 3px 0 0 3px;
+    }
+
+    .kg-audio-thumbnail.placeholder {
+        background: var(--ghost-accent-color);
+    }
+
+    .kg-audio-thumbnail.placeholder svg {
+        width: 24px;
+        height: 24px;
+        fill: white;
+    }
+
+    .kg-audio-player-container {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        width: 100%;
+        --seek-before-width: 0%;
+        --volume-before-width: 100%;
+        --buffered-width: 0%;
+    }
+
+    .kg-audio-title {
+        width: 100%;
+        padding: 8px 12px 0;
+        border: none;
+        font-family: inherit;
+        font-size: 1.1em;
+        font-weight: 700;
+        background: transparent;
+    }
+
+    .kg-audio-player {
+        display: none;
+    }
+
+    .kg-width-full.kg-card-hascaption {
+        display: grid;
+        grid-template-columns: inherit;
+    }
+
+    .post-content table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    .post-content th {
+        padding: 0.5em 0.8em;
+        text-align: left;
+        font-size: .75em;
+        text-transform: uppercase;
+    }
+
+    .post-content td {
+        padding: 0.4em 0.7em;
+    }
+
+    .post-content tbody tr:nth-child(2n + 1) {
+        background-color: rgba(0,0,0,0.1);
+        padding: 1px;
+    }
+
+    .post-content tbody tr:nth-child(2n + 2) td:last-child {
+        box-shadow:
+            inset 1px 0 rgba(0,0,0,0.1),
+            inset -1px 0 rgba(0,0,0,0.1);
+    }
+
+    .post-content tbody tr:nth-child(2n + 2) td {
+        box-shadow: inset 1px 0 rgba(0,0,0,0.1);
+    }
+
+    .post-content tbody tr:last-child {
+        border-bottom: 1px solid rgba(0,0,0,.1);
+    }
+
+    .page-footer {
+        padding: 60px 5vmin;
+        margin: 60px auto 0;
+        text-align: center;
+        background-color: #f8f8f8;
+    }
+
+    .page-footer h3 {
+        margin: 0.5rem 0 0 0;
+    }
+
+    .page-footer p {
+        max-width: 500px;
+        margin: 1rem auto 1.5rem;
+        font-size: 1.7rem;
+        line-height: 1.5em;
+        color: rgba(0,0,0,0.6)
+    }
+
+    .powered {
+        display: inline-flex;
+        align-items: center;
+        margin: 30px 0 0;
+        padding: 6px 9px 6px 6px;
+        border: rgba(0,0,0,0.1) 1px solid;
+        font-size: 12px;
+        line-height: 12px;
+        letter-spacing: -0.2px;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+        font-weight: 500;
+        color: #222;
+        text-decoration: none;
+        background: #fff;
+        border-radius: 6px;
+    }
+
+    .powered svg {
+        height: 16px;
+        width: 16px;
+        margin: 0 6px 0 0;
+    }
+
+    @media (max-width: 600px) {
+        body {
+            font-size: 1.6rem;
+        }
+        h1 {
+            font-size: 3rem;
+        }
+
+        h2 {
+            font-size: 2.2rem;
+        }
+    }
+
+    @media (max-width: 400px) {
+        h1 {
+            font-size: 2.6rem;
+            line-height: 1.15em;
+        }
+        h2 {
+            font-size: 2rem;
+            line-height: 1.2em;
+        }
+        h3 {
+            font-size: 1.7rem;
+        }
+    }
+
+    :root {--ghost-accent-color: #1a1b20;}
+    </style>
+
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+    <script async src="https://cdn.ampproject.org/v0.js"></script>
+
+    
+
+</head>
+
+<body class="amp-template">
+    <header class="page-header">
+        <a href="https://www.gokhangeyik.net">
+                <amp-img class="site-icon" src="https://www.gokhangeyik.net/content/images/2021/01/header_logo.png" width="50" height="50" layout="fixed" alt="Gökhan Geyik | Sistem Yöneticisi Bir Bey!"></amp-img>
+        </a>
+    </header>
+
+    <main class="content" role="main">
+        <article class="post">
+
+            <header class="post-header">
+                <h1 class="post-title">Ghost ve NGINX Proxy Cache</h1>
+                <section class="post-meta">
+                    Gökhan Geyik -
+                    <time class="post-date" datetime="2021-01-10">10 Oca 2021</time>
+                </section>
+            </header>
+            <figure class="post-image">
+                <amp-img src="https://www.gokhangeyik.net/content/images/2021/01/ghost-nginx-proxy.jpg" width="600" height="340" layout="responsive" 
+                alt="Ghost ve NGINX Proxy Cache"
+                ></amp-img>
+            </figure>
+            <section class="post-content">
+
+                <p><a href="https://github.com/TryGhost/Ghost?ref=localhost"><strong>Ghost</strong></a>, bir içerik yönetim sistemi. Modern ve oldukça hızlı. Benim için en büyük cazibesi ise <a href="https://en.wikipedia.org/wiki/Markdown?ref=localhost">Markdown</a> ile makale yazabilme kolaylığı.</p><p>Uzun zamandır bir arayışın içindeydim. Wordpress artık beni bunaltmaya başladı çünkü bir çok temel eksiklikleri mevcut. Bunları tamamlamak için pluginler deryasında boğulmaktan kaçamıyorsunuz. <a href="https://en.wikipedia.org/wiki/Qmail?ref=localhost">Qmail</a> <a href="https://notes.sagredo.eu/en/qmail-notes-185/patching-qmail-82.html?ref=localhost">patch çılgınlığı</a> gibi...</p><p>Basit, hızlı, hafif ve kolay kullanılabilir bir şeye ihtiyacım vardı. <a href="https://getgrav.org/?ref=localhost">Grav</a> ilk durağım oldu ve işin doğrusu hoşuma da gitti. Üzerinde epeyce zaman harcadım ve hatta bir süre sitemi yayınladım. Neticede kendisi ile de yollarımızı ayırdık malesef. Çok detaya girmek istemiyorum.</p><p>Ghost hali hazırda zaten oldukça hızlı çalışan bir <a href="https://en.wikipedia.org/wiki/Content_management_system?ref=localhost">CMS</a>. Fakat <a href="https://expressjs.com/?ref=localhost">Express'i</a> olduğu gibi yayınlamak fikrine pek sıcak bakmıyorum. Bu nedenle önüne bir NGINX yerleştirmeye karar verdim.</p><p>Bu sayede <a href="http://nginx.org/?ref=localhost">NGINX</a> ile bir çok numara yapabilirim. Proxy Cache de bunlardan yalnızca bir tanesi.</p><p>Proxy Cache ile tüm çıktıyı cacheleyeceğim ve böylelikle arkadaki Ghost servisini bir nevi maskelemiş olacağım. Ayrıca Lua ve Ghost'un Webhooklarını kullanarak, sitede değişikiller oldukça, cachein tazelenmesini de sağlayacağım.</p><p>Tüm yaptıklarımı adım adım anlatacağı ancak bir parça NGINX biliyor olmak işi kolaylaştıracaktır.</p><h2 id="altyap-senaryosu">Altyapı Senaryosu</h2><p>Elimde bir <strong>Ghost</strong> olacak ve <code>https://www.gokhangeyik.net</code> ile erişebileceğim. Ancak önünde bir <strong>NGINX</strong> olacak ve ilk olarak trafiği karşılayacak. İsteğe bağlı olarak, Ghost backend ne cevap verirse, ziyaretçiye iletirken aynı zamanda da bir sonraki istekler için 2 saat boyunca cache yapacak.</p><p>Cache purge için son derece basit bir Lua script kullanacağım. Çünkü sitenin içeriği güncellendiğinde tüm cache içeriğinin temizlenmesi büyük bir problem değil. Ancak daha kompleks purge isteklerini elbette kendiniz de yazabilirsiniz. Tabi bu minvalde kendi webhooklarınızı düzenlemeniz gerekir.</p><h2 id="kuruluma-ba-layal-m">Kuruluma Başlayalım</h2><p>Tüm bunlar için Docker kullanacağım. Ancak bu bare metal kurulum yapanlar için de bir fark yaratmaz. Neticede odaklandığımız konu NGINX ve Ghost olacak.</p><h3 id="ghost-kurulumu">Ghost Kurulumu</h3><pre><code class="language-plaintext">docker run --name ghost -p 2368:2368 ghost:3-alpine</code></pre><p>Ghost ilk kez çalıştığı için, gerek duyduğu bir takım işlemler gerçekleştirecek ve neticede <code>https://www.gokhangeyik.net</code>erişilebilir hale gelecek.</p><p>Bunu <code>curl</code>ile test edebiliriz.</p><pre><code class="language-plaintext">➜ curl -I https://www.gokhangeyik.net
+HTTP/1.1 200 OK
+X-Powered-By: Express
+Cache-Control: public, max-age=0
+Content-Type: text/html; charset=utf-8
+Content-Length: 29518
+ETag: W/"734e-9ZdP5ZYyAQqraAJyQref33AByfQ"
+Vary: Accept-Encoding
+Date: Wed, 06 Jan 2021 21:16:43 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5</code></pre><p>Ghost çalışıyor ve isteklere yanıt veriyor. Artık devam edebiliriz.</p><h3 id="nginx-kurulumu">NGINX Kurulumu</h3><p>Bunun için de Docker kullanacağım. Basit tutmak için, contaier temelini Alpine tercih ediyorum. </p><pre><code class="language-plaintext">docker run --name nginx --rm -it -p 80:80 alpine:latest sh</code></pre><p>Artık bir Alpine containerım var ve gerekli paketleri kurabilirim. İhtiyacım olan paketler:</p><ul><li>nginx</li><li>nginx-mod-http-lua</li><li>lua-resty-core</li></ul><pre><code class="language-plaintext">apk update
+apk add --no-cache nginx nginx-mod-http-lua lua-resty-core</code></pre><p>Amacıma ulaşmaya hemen hemen hazırım ancak burada kısa bir bilgi vermem gerekiyor. Herşeyi cache etmek akıllıca olmayacaktır. Çünkü Ghost'un bazı lokasyonları tam tersine cache edilmemeli. Çünkü bu lokasyonlar, giriş yapmış kullanıcılara ait araçları içeriyor. Burada <code><a href="https://nginx.org/en/docs/http/ngx_http_proxy_module.html?ref=localhost">proxy_cache_bypass</a></code> kullanabilirdim ve cookie bunun için harika bir belirleyici olabilirdi, ancak ben biraz daha net olmak istiyorum ve bu nedenle <code><a href="http://nginx.org/en/docs/http/ngx_http_core_module.html?ref=localhost#location">location</a></code> konteksti ile bu özel alanları ayrı tutacağım.</p><pre><code class="language-nginx">proxy_cache_path /var/cache/nginx/ levels=1:2 keys_zone=ghost_cache:10m max_size=512m inactive=2h;
+proxy_cache_key "$request_method$host$request_uri";
+proxy_cache_methods GET HEAD;</code></pre><p>Yukarıdaki direktifler <code>http</code> kontekstinin içinde olmalı. Şimdi tek tek ne yaptığımı anlatacağım.</p><p><code>proxy_cache_path</code>, yapacağım işlem için oldukça kritik. Cache edilmiş isteklere ait dosyaların, nerede, ne şekilde ve ne kadar süreyle tutulmasını istediğimi belirtebilmemi sağlar. Ayrıca bu dosyaların byte cinsinden kaplayabileceği en fazla alanı da limitleyebilirim.</p><p>Örneğimden gidecek olursam, cache istekleri <code>/var/cache/nginx</code> dizininde depolanacak.</p><p><code>level=1:2</code> ise bu cache çıktılarının hiyerarşik olarak düzenini belirtiyor. NGINX, cache çıktılarını <code><a href="https://en.wikipedia.org/wiki/MD5?ref=localhost">MD5</a></code> ile isimlendirir. Yani günün sonunda aşağıdaki gibi dosya isimlerine sahip olacağım.</p><figure class="kg-card kg-code-card"><pre><code class="language-plaintext">bash-5.1# ls -Al
+total 32
+drwx------    3 nginx    nginx         4096 Jan 10 08:40 3
+drwx------    3 nginx    nginx         4096 Jan 10 08:41 4
+drwx------    3 nginx    nginx         4096 Jan 10 08:40 6
+drwx------    4 nginx    nginx         4096 Jan 10 08:41 8
+drwx------    3 nginx    nginx         4096 Jan 10 08:40 9
+drwx------    3 nginx    nginx         4096 Jan 10 08:40 d
+drwx------    3 nginx    nginx         4096 Jan 10 08:41 e
+drwx------    3 nginx    nginx         4096 Jan 10 08:40 f</code></pre><figcaption>/var/cache/nginx</figcaption></figure><p>Örnek olarak <code>8</code> dizininin içeriğine bakalım.</p><pre><code class="language-plaintext">bash-5.1# cd /var/cache/nginx/8/
+bash-5.1# find .
+.
+./ca
+./ca/31b4504a91cc38c996e2dff211e59ca8
+./2e
+./2e/b999904f61cd8ade87149edef72dd2e8</code></pre><p>Yani NGINX, oluşturduğu bu dosya isimlerinden sonran 1. karakteri ilk seviye dizin olarak oluşturuyor. Bundan sonra gelen 2 karakteri de -<em>ki bizim çıktımızda bu <code>ca</code> ve <code>2e</code></em>- bir alt dizin olarak oluşturup, cache çıktısını burada saklıyor.</p><p><code>keys_zone</code> bir çeşit index olarak düşünülebilir. Cache dosyalarının anahtarları burada tutuluyor. NGINX dökümanına göre 1 Mbyte boyutundan bir zone 8.000 anahtar saklayabiliyor. Aslında 10 Mbyte dahi benim için büyük bir alan.</p><p><code>max_size</code> ise adı üzerinde, cache dosyalarının belirtilen dizin içerisinde kaplayabileceği maksimum disk alanı.</p><p><code>inactive</code> ise bir pasif cache anahtarının maksimum süresini belirtiyor. Eğer cache edilmiş bir dosyaya, bu süre zarfında hiç erişilmemiş ise, cache durumu ne olursa olsun NGINX silecektir.</p><p><code>proxy_cache_key</code>, keys_zone içerisinde tutulacak anahtarları isimlendirmek için bir şablon. Bu yönerge bir çok amaç için kullanılabilir. Eğer responsive bir web  uygulaması kullanmıyorsanız, mobil ve masa üstü istemcileri için farklı cacheler üretebilirsiniz.</p><p>Ve son olarak <code>proxy_cache_methods</code> ise istediğim <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods?ref=localhost">HTTP istek metodlarını</a> cache için seçmeme yardımcı oluyor.</p><p>Devamında artık cache yapmak istediğim ve cache dışında tutmak istediğim lokasyonları belirleyip yayınlamaya başlayabilirim. </p><pre><code class="language-nginx">location / {
+            proxy_hide_header x-powered-by;
+            proxy_hide_header Etag;
+            proxy_redirect off;
+
+            proxy_pass http://ghost:2368;
+
+            proxy_cache ghost_cache;
+            proxy_cache_valid 200 60m;
+            proxy_cache_valid 404 3m;
+            proxy_cache_revalidate off;
+            proxy_ignore_headers X-Accel-Expires Expires Cache-Control;
+            add_header X-NGINX-Cache $upstream_cache_status;
+        }</code></pre><p>Tek tek parametreleri tanıtmak ve anlatmak istemiyorum o nedenlen buradan sonrasını biraz daha hızlı devam edeceğim. <code>location /</code> Hemen her yeri kapsayan bir cache tanımı oldu. <code>HTTP 200</code> 60 dakika boyunca, <code>HTTP 404</code> ise 3 dakika boyunca cache olacak. Bir takım HTTP başlıklarını gizlemeyi tercih ettim.</p><p>Buraya gelen tüm istekler, eğer <code>keys_zone</code> içerisinde değilse <code>proxy_pass</code> marifetiyle ghost ismine sahip containera gidecek. Son olarak da bir belirleyici ekledim ki cache işe yarıyor mu görebileyim. </p><p>Önemli iki alan var ki onları cache etmemeliyim. Bunlardan biri Ghost'un yönetim ara yüzü, diğeri ise gönderileri ön izleme yapmama yarayan alan. Aşağıdaki kontekst işime yarayacaktır.</p><pre><code class="language-nginx">location ~* ^(/ghost/|/p/) {
+            proxy_hide_header x-powered-by;
+            proxy_hide_header Etag;
+            proxy_redirect off;
+
+            proxy_pass http://ghost:2368;
+            break;
+        }</code></pre><p>Şimdi bunları bir araya getirip ilk testlere başlayayım. Testlerimde <code>curl</code> ve <code><a href="https://github.com/davecheney/httpstat?ref=localhost">httpstat</a></code> kullanacağım ve konfigürasyonum şu şekilde görünecek.</p><pre><code class="language-nginx">proxy_cache_path /var/cache/nginx/ levels=1:2 keys_zone=ghost_cache:75m max_size=512m inactive=2h;
+proxy_cache_key "$request_method$host$request_uri";
+proxy_cache_methods GET HEAD;
+
+server {
+    listen 80;
+
+    location ~* ^(/ghost/|/p/) {
+        proxy_hide_header x-powered-by;
+        proxy_hide_header Etag;
+        proxy_redirect off;
+
+        proxy_pass http://ghost:2368;
+        break;
+    }
+
+    location / {
+        proxy_hide_header x-powered-by;
+        proxy_hide_header Etag;
+        proxy_redirect off;
+
+        proxy_pass http://ghost:2368;
+
+        proxy_cache ghost_cache;
+        proxy_cache_valid 200 60m;
+        proxy_cache_valid 404 3m;
+        proxy_cache_revalidate off;
+        proxy_ignore_headers X-Accel-Expires Expires Cache-Control;
+        add_header X-NGINX-Cache $upstream_cache_status;
+    }
+}</code></pre><p>İlk olarak Ghost'u direk erişim ile test edeceğim. Söylediğim gibi aslında Ghost oldukça hızlı çalışan bir içerik yönetim sistemi.</p><pre><code class="language-plaintext">➜ httpstat https://www.gokhangeyik.net
+Connected to ::1:2368 from ::1:56947
+
+HTTP/1.1 200 OK
+X-Powered-By: Express
+Cache-Control: public, max-age=0
+Content-Type: text/html; charset=utf-8
+Content-Length: 29518
+ETag: W/"734e-7qGhBLEw4KHXjVrEObfphnPgXMc"
+Vary: Accept-Encoding
+Date: Sun, 10 Jan 2021 10:14:37 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+
+  DNS Lookup   TCP Connection   Server Processing   Content Transfer
+[     1ms    |       0ms      |       57ms        |        1ms       ]
+             |                |                   |                  |
+    namelookup:1ms            |                   |                  |
+                        connect:1ms               |                  |
+                                      starttransfer:58ms             |
+                                                                 total:59ms</code></pre><p>Test blogunun ana sayfası 58ms içerisinde erişilir hale geldi. Bu oldukça iyi. Tabi <code>httpstat</code> maalesef javascript çalıştırmıyor. Bu süre reel değil. Yalnızca çıkarım yapmama yardım edecek.</p><p>Şimdi aynı isteği NGINX proxy üzerinden yapacağım. İlk isteğim cache edilmemiş olacağından 58ms'den daha uzun olma ihtimali var.</p><pre><code class="language-plaintext">➜ httpstat http://localhost
+Connected to ::1:80 from ::1:57112
+
+HTTP/1.1 200 OK
+Server: nginx
+Date: Sun, 10 Jan 2021 10:19:06 GMT
+Content-Type: text/html; charset=utf-8
+Content-Length: 29532
+Connection: keep-alive
+Cache-Control: public, max-age=0
+Vary: Accept-Encoding
+X-NGINX-Cache: MISS
+
+  DNS Lookup   TCP Connection   Server Processing   Content Transfer
+[     2ms    |       0ms      |       68ms        |        0ms       ]
+             |                |                   |                  |
+    namelookup:2ms            |                   |                  |
+                        connect:2ms               |                  |
+                                      starttransfer:70ms             |
+                                                                 total:70ms</code></pre><p>Beklediğim gibi oldu ve gayet makul. İlk istek 70ms kadar sürdü ve <code>X-NGINX-Cache: MISS</code> headerı henüz cache edilmediğini gösteriyor. Bundan sonraki isteğim direk olarak NGINX cache olacak ve arada ciddi bir hız farkı olmasını bekliyorum.</p><pre><code class="language-plaintext">➜ httpstat http://localhost
+Connected to ::1:80 from ::1:57190
+
+HTTP/1.1 200 OK
+Server: nginx
+Date: Sun, 10 Jan 2021 10:21:21 GMT
+Content-Type: text/html; charset=utf-8
+Content-Length: 29532
+Connection: keep-alive
+Cache-Control: public, max-age=0
+Vary: Accept-Encoding
+X-NGINX-Cache: HIT
+
+  DNS Lookup   TCP Connection   Server Processing   Content Transfer
+[     1ms    |       0ms      |        3ms        |        0ms       ]
+             |                |                   |                  |
+    namelookup:1ms            |                   |                  |
+                        connect:1ms               |                  |
+                                      starttransfer:4ms              |
+                                                                 total:4ms</code></pre><p>Toplam süre 4ms. Mükemmel bir sonuç. <code>X-NGINX-Cache: HIT</code> Artık cevabın Ghost'tan değil NGINX'ten geldiğini biliyorum.Öte yandan artık Ghost'u dert etmek zorunda değilim. Cache olduğu müddetçe, yüksek bir trafik ile karşılaşmayacak.</p><p>Şimdi sıra bu cache içeriğini temizlemekte. İştiyorum ki sitemde bir değişiklik yaptığımda, bu cache tamamen silinsin ve ben de değişiklikleri görebileyim. Bunun için iki şeye ihtiyacım var.</p><ol><li>NGINX purge lokasyonu</li><li>Ghost içerisinde bunu tetikleyebilecek bir mekanizma.</li></ol><p>Bunların hepsine sahibim. NGINX konfigürasyonumu aşağıdaki şekilde güncelliyorum.</p><pre><code class="language-nginx">proxy_cache_path /var/cache/nginx/ levels=1:2 keys_zone=ghost_cache:75m max_size=512m inactive=2h;
+proxy_cache_key "$request_method$host$request_uri";
+proxy_cache_methods GET HEAD;
+
+server {
+    listen 80;
+
+    location ~* ^(/ghost/|/p/) {
+        proxy_hide_header x-powered-by;
+        proxy_hide_header Etag;
+        proxy_redirect off;
+
+        proxy_pass http://ghost:2368;
+        break;
+    }
+
+    location / {
+        proxy_hide_header x-powered-by;
+        proxy_hide_header Etag;
+        proxy_redirect off;
+
+        proxy_pass http://ghost:2368;
+
+        proxy_cache ghost_cache;
+        proxy_cache_valid 200 60m;
+        proxy_cache_valid 404 3m;
+        proxy_cache_revalidate off;
+        proxy_ignore_headers X-Accel-Expires Expires Cache-Control;
+        add_header X-NGINX-Cache $upstream_cache_status;
+    }
+location /purgethecache {
+        content_by_lua_block {
+            os.execute("/bin/rm -rf /var/cache/nginx/*")
+        }
+    }
+}</code></pre><p><code>purgethecache</code> isminde bir lokasyon ekledim ve oldukça basit bir lua direktifi çalıştırıyorum. Buraya gelen her istek ile birlikte <code>/var/cache/nginx</code> dizininin içeriği temizlenecek ve böylece cache yok edilmiş olacak.</p><p>Her Ghost blog bir yönetim arayüzüne sahip. Bu arayüzde <code>Integrations</code> bölümü mevcut. Bu bölümden bir <code>Custom Integration</code> ekleyeceğim.</p><figure class="kg-card kg-image-card kg-width-wide kg-card-hascaption"><figcaption>Ghost Custom Integrations</figcaption></figure><p>Şimdi de bu entegrasyona bir Webhook ekleyeceğim. Yani Ghost, sitede herhangi bir değişiklik olunca, gidip <code>purgethecache</code> lokasyonunu ziyaret edecek. NGINX de tanımlandığı gibi cache içeriğini silecek.</p><figure class="kg-card kg-image-card kg-width-wide kg-card-hascaption"><figcaption>Ghost Webhook</figcaption></figure><p>Hedefime ulaştım. Artık calışan bir cache mekanizmam ve purge mekanizmam mevcut. Bu konfigurasyon elbette geliştiriebilir ve ben elimden geldiğince sadeleştirerek anlatmak istedim.</p><p></p>
+
+            </section>
+
+        </article>
+    </main>
+    <footer class="page-footer">
+            <amp-img class="site-icon" src="https://www.gokhangeyik.net/content/images/2021/01/header_logo.png" width="50" height="50" layout="fixed" alt="Gökhan Geyik | Sistem Yöneticisi Bir Bey!"></amp-img>
+        <h3>Gökhan Geyik | Sistem Yöneticisi Bir Bey!</h3>
+            <p>Sistem Yöneticisi Bir Bey!</p>
+        <p><a href="https://www.gokhangeyik.net">Read more posts →</a></p>
+        <a class="powered" href="https://ghost.org" target="_blank" rel="noopener"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 156 156"><g fill="none" fill-rule="evenodd"><rect fill="#15212B" width="156" height="156" rx="27"/><g transform="translate(36 36)" fill="#F6F8FA"><path d="M0 71.007A4.004 4.004 0 014 67h26a4 4 0 014 4.007v8.986A4.004 4.004 0 0130 84H4a4 4 0 01-4-4.007v-8.986zM50 71.007A4.004 4.004 0 0154 67h26a4 4 0 014 4.007v8.986A4.004 4.004 0 0180 84H54a4 4 0 01-4-4.007v-8.986z"/><rect y="34" width="84" height="17" rx="4"/><path d="M0 4.007A4.007 4.007 0 014.007 0h41.986A4.003 4.003 0 0150 4.007v8.986A4.007 4.007 0 0145.993 17H4.007A4.003 4.003 0 010 12.993V4.007z"/><rect x="67" width="17" height="17" rx="4"/></g></g></svg> Published with Ghost</a>
+    </footer>
+    
+</body>
+</html>
