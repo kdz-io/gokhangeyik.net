@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tags on Gökhan Geyik | Sistem Yöneticisi Bir Bey!</title>
+    <link>https:/www.gokhangeyik.net/tags/</link>
+    <description>Recent content in Tags on Gökhan Geyik | Sistem Yöneticisi Bir Bey!</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 19 Aug 2020 20:44:35 +0300</lastBuildDate>
+    <atom:link href="https:/www.gokhangeyik.net/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Announce</title>
+      <link>https:/www.gokhangeyik.net/tags/announce/</link>
+      <pubDate>Wed, 19 Aug 2020 20:44:35 +0300</pubDate>
+      <guid>https:/www.gokhangeyik.net/tags/announce/</guid>
+      <description></description>
+    </item>
+  </channel>
+</rss>
