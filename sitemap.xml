@@ -2,25 +2,25 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https:/www.gokhangeyik.net/aaa-noldu/</loc>
+    <loc>/aaa-noldu/</loc>
     <lastmod>2020-08-19T20:44:35+03:00</lastmod>
   </url><url>
-    <loc>https:/www.gokhangeyik.net/tags/announce/</loc>
+    <loc>/tags/announce/</loc>
     <lastmod>2020-08-19T20:44:35+03:00</lastmod>
   </url><url>
-    <loc>https:/www.gokhangeyik.net/</loc>
+    <loc>/</loc>
     <lastmod>2020-08-19T20:44:35+03:00</lastmod>
   </url><url>
-    <loc>https:/www.gokhangeyik.net/posts/</loc>
+    <loc>/posts/</loc>
     <lastmod>2020-08-19T20:44:35+03:00</lastmod>
   </url><url>
-    <loc>https:/www.gokhangeyik.net/tags/</loc>
+    <loc>/tags/</loc>
     <lastmod>2020-08-19T20:44:35+03:00</lastmod>
   </url><url>
-    <loc>https:/www.gokhangeyik.net/about/</loc>
+    <loc>/about/</loc>
   </url><url>
-    <loc>https:/www.gokhangeyik.net/categories/</loc>
+    <loc>/categories/</loc>
   </url><url>
-    <loc>https:/www.gokhangeyik.net/contact/</loc>
+    <loc>/contact/</loc>
   </url>
 </urlset>

@@ -2,31 +2,31 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Gökhan Geyik | Sistem Yöneticisi Bir Bey!</title>
-    <link>https:/www.gokhangeyik.net/</link>
+    <link>/</link>
     <description>Recent content on Gökhan Geyik | Sistem Yöneticisi Bir Bey!</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Wed, 19 Aug 2020 20:44:35 +0300</lastBuildDate>
-    <atom:link href="https:/www.gokhangeyik.net/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Aaa! Noldu?</title>
-      <link>https:/www.gokhangeyik.net/aaa-noldu/</link>
+      <link>/aaa-noldu/</link>
       <pubDate>Wed, 19 Aug 2020 20:44:35 +0300</pubDate>
-      <guid>https:/www.gokhangeyik.net/aaa-noldu/</guid>
+      <guid>/aaa-noldu/</guid>
       <description>&lt;p&gt;Önemli bir durum yok. 1998&amp;rsquo;den bu yana web sitemi sürekli siler baştan yaparım.&#xA;Doymadım doyamadım.&lt;/p&gt;&#xA;&lt;p&gt;Eski yazılarımdan hiç hoşlanmam yenilerini yazayım diye siler atarım.&#xA;3 bilemedin 4 tane yazarım sonra yine bırakırım.&lt;/p&gt;&#xA;&lt;p&gt;Bu yeni tasarımla birlikte, bir çok güncel başlıkta ve özellikle cloud teknolojileri ile ilgili olarak,&#xA;zerre fayda görmeyeceğiniz yazılar yazmayı planlıyorum.&lt;/p&gt;&#xA;&lt;p&gt;Heyecanlandığınızı ve sabırsızlandığınızı biliyorum. Ben de sizin yerinizde olsam aynı şeyleri hissederdim.&lt;/p&gt;&#xA;&lt;p&gt;Söyleyeceklerim bu kadar.&lt;/p&gt;</description>
     </item>
     <item>
       <title>About</title>
-      <link>https:/www.gokhangeyik.net/about/</link>
+      <link>/about/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https:/www.gokhangeyik.net/about/</guid>
+      <guid>/about/</guid>
       <description>&lt;p&gt;Sin tantum est boni praeter summam voluptatem, et eam sempiternam. Cur post Tarentum ad Archytam. Qua ex cognitione facilior facta est investigatio rerum occultissimarum, empulla enim tenuissimo victu, id est contemptissimis escis et potionibus, minorem voluptatem percipi quam rebus exquisitissimis ad epulandum. Non enim iam stirpis bonum quaeret, sed animalis. Qui autem esse poteris, nisi te amor ipse ceperit. Sic igitur in homine perfectio ista in eo potissimum, quod est optimum, id est in virtute, laudatur. Natura sic ab iis investigata est, ut nulla pars caelo, mari, terra, ut poëtice loquar, praetermissa sit. Eadem nunc mea adversum te oratio est. Mihi quidem Homerus huius modi quiddam vidisse videatur in iis, quae de Sirenum cantibus ages tandem finxerit.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Contact</title>
-      <link>https:/www.gokhangeyik.net/contact/</link>
+      <link>/contact/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https:/www.gokhangeyik.net/contact/</guid>
+      <guid>/contact/</guid>
       <description>&lt;p&gt;Joseph comes with a built-in contact form, that you can use with Formspree service to handle up to 50 submissions per month for free. You could also easily switch to another contact form service if you want.&lt;/p&gt;</description>
     </item>
   </channel>
