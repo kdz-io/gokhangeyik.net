@@ -1,33 +1,21 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>Gökhan Geyik | Sistem Yöneticisi Bir Bey!</title>
-    <link>https://www.gokhangeyik.net/</link>
-    <description>Recent content on Gökhan Geyik | Sistem Yöneticisi Bir Bey!</description>
-    <generator>Hugo</generator>
-    <language>en-us</language>
-    <lastBuildDate>Wed, 12 Feb 2025 18:51:46 +0100</lastBuildDate>
-    <atom:link href="https://www.gokhangeyik.net/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>İçimiz Dışımız Yapay Zeka</title>
-      <link>https://www.gokhangeyik.net/icimiz-disimiz-yapay-zeka/</link>
-      <pubDate>Wed, 12 Feb 2025 18:51:46 +0100</pubDate>
-      <guid>https://www.gokhangeyik.net/icimiz-disimiz-yapay-zeka/</guid>
-      <description>&lt;p&gt;Selam sana okuyucu!&lt;/p&gt;&#xA;&lt;p&gt;Zart AI, zurt AI.&lt;/p&gt;&#xA;&lt;p&gt;Sabahları kahvaltılardan önce AI, akraba ziyaretlerinde AI.&lt;/p&gt;&#xA;&lt;p&gt;Mükellef sofraların vazgeçilmez lezzeti&amp;hellip; Evet doğru bildin okuyucu. AI!&lt;/p&gt;&#xA;&lt;p&gt;Farkında mısın sürekli bir AI zırıltısı etrafta?&lt;/p&gt;&#xA;&lt;p&gt;Çamaşır makinesi yapmışlar yahu! AI ile karar verip çamaşır yıkıyormuş.&#xA;Donların daha beyaz olacak hadi yaşadın. Ama sen yine de renklilerle, beyazları kendin ayıracaksın eğer pembeye çalan donlar giymek istemiyorsan.&lt;/p&gt;&#xA;&lt;p&gt;Nedendir bilinmez ama beyaz don giyen biri olduğunu düşünüyorum okuyucu.&#xA;O yüzden bu uyarıyı yapmak istedim. Renklilerle beyazları aynı anda yıkama. Bu tavsiyeyi sana bir AI vermez.&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>Aaa! Noldu?</title>
-      <link>https://www.gokhangeyik.net/aaa-noldu/</link>
-      <pubDate>Wed, 22 Jan 2025 20:44:35 +0300</pubDate>
-      <guid>https://www.gokhangeyik.net/aaa-noldu/</guid>
-      <description>&lt;p&gt;Önemli bir durum yok. 1998&amp;rsquo;den bu yana web sitemi sürekli siler baştan yaparım.&#xA;Doymadım doyamadım.&lt;/p&gt;&#xA;&lt;p&gt;Eski yazılarımdan hiç hoşlanmam yenilerini yazayım diye siler atarım.&#xA;3 bilemedin 4 tane yazarım sonra yine bırakırım.&lt;/p&gt;&#xA;&lt;p&gt;Bu yeni tasarımla birlikte, bir çok güncel başlıkta ve özellikle cloud teknolojileri ile ilgili olarak,&#xA;zerre fayda görmeyeceğiniz yazılar yazmayı planlıyorum.&lt;/p&gt;&#xA;&lt;p&gt;Heyecanlandığınızı ve sabırsızlandığınızı biliyorum. Ben de sizin yerinizde olsam aynı şeyleri hissederdim.&lt;/p&gt;&#xA;&lt;p&gt;Söyleyeceklerim bu kadar.&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>Kimim Acaba?</title>
-      <link>https://www.gokhangeyik.net/about/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://www.gokhangeyik.net/about/</guid>
-      <description>&lt;p&gt;Balikesir&amp;rsquo;de dogdum ve Bandirma&amp;rsquo;da buyudum. Bir sure universite egitimi icin Cankiri&amp;rsquo;da yasadim.&#xA;Egitilemedigim icin yarida biraktim. O sirada is hayatina atilip Bursa&amp;rsquo;ya tasindim.&lt;/p&gt;&#xA;&lt;p&gt;Calismaya basladiktan bir sure sonra, fena biri degilim aslinda tekrar bir egitilmeyi deneyeyim dedim.&lt;/p&gt;&#xA;&lt;p&gt;Olmadi, yine yarida biraktim. Ama artik bahanem vardi. Is var guc var simdi kim ugrasacak?&lt;/p&gt;&#xA;&lt;p&gt;1983&amp;rsquo;ten bu yana halen hayattayim.&#xA;Soyle donup baktigimda, buyuk bolumunu calisarak gecirmisim. Halen de bir degisiklik yok yani.&lt;/p&gt;</description>
-    </item>
-  </channel>
-</rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Gökhan Geyik | Sistem Yöneticisi Bir Bey!</title><link>https://www.gokhangeyik.net/</link><description>Recent content on Gökhan Geyik | Sistem Yöneticisi Bir Bey!</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Wed, 12 Feb 2025 18:51:46 +0100</lastBuildDate><atom:link href="https://www.gokhangeyik.net/index.xml" rel="self" type="application/rss+xml"/><item><title>İçimiz Dışımız Yapay Zeka</title><link>https://www.gokhangeyik.net/icimiz-disimiz-yapay-zeka/</link><pubDate>Wed, 12 Feb 2025 18:51:46 +0100</pubDate><guid>https://www.gokhangeyik.net/icimiz-disimiz-yapay-zeka/</guid><description>&lt;p>Selam sana okuyucu!&lt;/p>
+&lt;p>Zart AI, zurt AI.&lt;/p>
+&lt;p>Sabahları kahvaltılardan önce AI, akraba ziyaretlerinde AI.&lt;/p>
+&lt;p>Mükellef sofraların vazgeçilmez lezzeti&amp;hellip; Evet doğru bildin okuyucu. AI!&lt;/p>
+&lt;p>Farkında mısın sürekli bir AI zırıltısı etrafta?&lt;/p>
+&lt;p>Çamaşır makinesi yapmışlar yahu! AI ile karar verip çamaşır yıkıyormuş.
+Donların daha beyaz olacak hadi yaşadın. Ama sen yine de renklilerle, beyazları kendin ayıracaksın eğer pembeye çalan donlar giymek istemiyorsan.&lt;/p>
+&lt;p>Nedendir bilinmez ama beyaz don giyen biri olduğunu düşünüyorum okuyucu.
+O yüzden bu uyarıyı yapmak istedim. Renklilerle beyazları aynı anda yıkama. Bu tavsiyeyi sana bir AI vermez.&lt;/p></description></item><item><title>Aaa! Noldu?</title><link>https://www.gokhangeyik.net/aaa-noldu/</link><pubDate>Wed, 22 Jan 2025 20:44:35 +0300</pubDate><guid>https://www.gokhangeyik.net/aaa-noldu/</guid><description>&lt;p>Önemli bir durum yok. 1998&amp;rsquo;den bu yana web sitemi sürekli siler baştan yaparım.
+Doymadım doyamadım.&lt;/p>
+&lt;p>Eski yazılarımdan hiç hoşlanmam yenilerini yazayım diye siler atarım.
+3 bilemedin 4 tane yazarım sonra yine bırakırım.&lt;/p>
+&lt;p>Bu yeni tasarımla birlikte, bir çok güncel başlıkta ve özellikle cloud teknolojileri ile ilgili olarak,
+zerre fayda görmeyeceğiniz yazılar yazmayı planlıyorum.&lt;/p>
+&lt;p>Heyecanlandığınızı ve sabırsızlandığınızı biliyorum. Ben de sizin yerinizde olsam aynı şeyleri hissederdim.&lt;/p>
+&lt;p>Söyleyeceklerim bu kadar.&lt;/p></description></item><item><title>Kimim Acaba?</title><link>https://www.gokhangeyik.net/about/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://www.gokhangeyik.net/about/</guid><description>&lt;p>Balıkesir&amp;rsquo;de doğdum ve Bandırma&amp;rsquo;da büyüdüm. Bir süre üniversite eğitimi için Çankırı&amp;rsquo;da yaşadım.
+Eğitilemediğim için yarıda bıraktım. O sırada iş hayatına atılıp Bursa&amp;rsquo;ya taşındım.&lt;/p>
+&lt;p>Çalışmaya başladıktan bir süre sonra, fena biri değilim aslında tekrar bir eğitilmeyi deneyeyim dedim.&lt;/p>
+&lt;p>Olmadı, yine yarıda bıraktım. Ama artık bahanem vardı. İş var güç var şimdi kim uğraşacak?&lt;/p>
+&lt;p>1983&amp;rsquo;ten bu yana halen hayattayım.
+Şöyle dönüp baktığımda, büyük bölümünü çalışarak geçirmişim. Halen de bir değişiklik yok yani.&lt;/p></description></item></channel></rss>
