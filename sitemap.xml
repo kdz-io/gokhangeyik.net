@@ -1,1 +1,33 @@
-<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type="text/xsl" href="//www.gokhangeyik.net/sitemap.xsl"?><sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><sitemap><loc>https://www.gokhangeyik.net/sitemap-pages.xml</loc><lastmod>2023-06-06T16:50:56.529Z</lastmod></sitemap><sitemap><loc>https://www.gokhangeyik.net/sitemap-posts.xml</loc><lastmod>2021-01-23T13:09:55.000Z</lastmod></sitemap><sitemap><loc>https://www.gokhangeyik.net/sitemap-authors.xml</loc><lastmod>2023-06-06T16:52:51.566Z</lastmod></sitemap><sitemap><loc>https://www.gokhangeyik.net/sitemap-tags.xml</loc><lastmod>2021-01-23T12:41:07.000Z</lastmod></sitemap></sitemapindex>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://www.gokhangeyik.net/tags/ai/</loc>
+    <lastmod>2025-02-12T18:51:46+01:00</lastmod>
+  </url><url>
+    <loc>https://www.gokhangeyik.net/</loc>
+    <lastmod>2025-02-12T18:51:46+01:00</lastmod>
+  </url><url>
+    <loc>https://www.gokhangeyik.net/icimiz-disimiz-yapay-zeka/</loc>
+    <lastmod>2025-02-12T18:51:46+01:00</lastmod>
+  </url><url>
+    <loc>https://www.gokhangeyik.net/posts/</loc>
+    <lastmod>2025-02-12T18:51:46+01:00</lastmod>
+  </url><url>
+    <loc>https://www.gokhangeyik.net/tags/rant/</loc>
+    <lastmod>2025-02-12T18:51:46+01:00</lastmod>
+  </url><url>
+    <loc>https://www.gokhangeyik.net/tags/</loc>
+    <lastmod>2025-02-12T18:51:46+01:00</lastmod>
+  </url><url>
+    <loc>https://www.gokhangeyik.net/aaa-noldu/</loc>
+    <lastmod>2025-01-22T20:44:35+03:00</lastmod>
+  </url><url>
+    <loc>https://www.gokhangeyik.net/tags/announce/</loc>
+    <lastmod>2025-01-22T20:44:35+03:00</lastmod>
+  </url><url>
+    <loc>https://www.gokhangeyik.net/categories/</loc>
+  </url><url>
+    <loc>https://www.gokhangeyik.net/about/</loc>
+  </url>
+</urlset>
