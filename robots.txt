@@ -1,4 +1,4 @@
 User-agent: *
 Disallow:
 
-Sitemap: https://www.siteniz.com/sitemap.xml
+Sitemap: https://www.gokhangeyik.net/sitemap.xml
